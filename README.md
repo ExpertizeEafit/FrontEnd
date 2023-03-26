@@ -1,13 +1,13 @@
 # FrontEnd
 
-#Vite: How run this project?
+# Vite: How run this project?
 
-##Install modules
+## Install modules
 ```bash
 npm i
 ```
 
-##Run on Dev
+## Run on Dev
 ```bash
 npm run dev
 ```
