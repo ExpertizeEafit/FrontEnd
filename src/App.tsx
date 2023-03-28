@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
+import CertificatesView from './views/CertificatesView'
+import Home from './views/Home'
+import LeaderboardView from './views/LeaderboardView'
+import ProfileView from './views/ProfileView'
+import ProgressView from './views/ProgressView'
+import SeniorityView from './views/SeniorityView'
+import TechnologiesView from './views/TechnologiesView'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <div className="App">
       <Navbar />
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-4xl font-bold text-teal-500">Vite + Rect (TS)</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        <Route path='/' element={<Home/>} />
+        <Route path='/seniorities' element={<SeniorityView/>} />
+        <Route path='/technologies' element={<TechnologiesView/>} />
+        <Route path='/leaderboard' element={<LeaderboardView/>} />
+        <Route path='/certificates' element={<CertificatesView/>} />
+        <Route path='/progress' element={<ProgressView/>} />
+        <Route path='/profile' element={<ProfileView/>} />
+      </Routes>
     </div>
   )
 }

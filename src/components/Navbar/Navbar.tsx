@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import IconButton from '../IconButton'
+import { Link } from 'react-router-dom'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -35,10 +36,10 @@ export default function Example() {
     <header className="bg-white">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Expertize</span>
             <img className="h-12 w-auto" src="/expertize.svg" alt="" />
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -51,21 +52,21 @@ export default function Example() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link to="/seniorities" className="text-sm font-semibold leading-6 text-gray-900">
             Seniorities
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link to="/technologies" className="text-sm font-semibold leading-6 text-gray-900">
             Technologies
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link to="/leaderboard" className="text-sm font-semibold leading-6 text-gray-900">
             Leaderboard
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link to="/certificates" className="text-sm font-semibold leading-6 text-gray-900">
             My certificates
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link>
+          <Link to="/progress" className="text-sm font-semibold leading-6 text-gray-900">
             My progress
-          </a>
+          </Link>
         </Popover.Group>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
