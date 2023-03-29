@@ -5,28 +5,38 @@
 
 
 .level {
-  @apply flex flex-col items-center justify-center rounded-full shadow-lg bg-white w-24 h-24 z-10 relative shadow-md border-blue-400 border-2;
+  @apply grid items-center justify-center shadow-lg bg-white w-96 h-24 z-10 relative shadow-md border-blue-400 border-2;
+  grid-template-columns: 12rem 7rem 5rem;
+  box-sizing: border-box;
+}
+
+.level-title {
+  @apply text-2xl font-bold;
+  word-wrap: break-word;
 }
 
 .level-status {
-  @apply absolute text-xs font-bold text-gray-700 rounded-full flex items-center justify-center px-4 py-1 capitalize font-normal;
-  bottom: -12px;
+  @apply relative text-xs font-bold text-gray-700 rounded-full flex items-center justify-center px-4 py-1 capitalize font-normal ;
 }
 
-.lock .level-status {
+.level-status.lock {
   @apply bg-gray-200 border-2 border-gray-200 shadow-lg text-gray-700;
 }
 
-.pending .level-status {
+.level-status.pending {
   @apply bg-yellow-200 border-2 border-yellow-400 shadow-lg text-yellow-700;
 }
 
-.unlock .level-status {
+.level-status.unlock {
   @apply bg-white border-2 border-gray-200 shadow-lg text-gray-700;
 }
 
-.completed .level-status {
+.level-status.completed {
   @apply bg-green-200 border-2 border-green-400 shadow-lg text-green-700;
+}
+
+.control {
+  @apply flex items-center justify-center;
 }
 
 .seniority-header {

@@ -1,8 +1,14 @@
+export interface ControlsProps {
+    name: string;
+    url: string;
+}
+
 export interface Requirement {
     id: string;
     name: string;
     description: string;
     status: string;
+    controls?: ControlsProps[];
 }
 
 export interface StyleProps {
