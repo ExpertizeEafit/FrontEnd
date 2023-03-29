@@ -3,7 +3,7 @@ import reactLogo from './../assets/react.svg'
 import viteLogo from '/vite.svg'
 
 export default function Home() {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState<number>(0)
 
     return (
     <div>

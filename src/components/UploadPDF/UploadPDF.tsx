@@ -3,20 +3,23 @@ import axios from "axios";
 
 const UploadPDF: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
-    const [technology, setTechnology] = useState<string | null>('Python');
+    const [currentFile, setCurrentFile] = useState<string | ArrayBuffer | null>(
+        null
+      );
+    const [technology, setTechnology] = useState<string>('Python');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-        const selectedFile = event.target.files[0];
+            const selectedFile = event.target.files[0];
 
-        if (selectedFile.type === "application/pdf") {
-            setFile(selectedFile);
-            setErrorMessage(null);
-        } else {
-            setFile(null);
-            setErrorMessage("Please select a PDF file.");
-        }
+            if (selectedFile.type === "application/pdf") {
+                setFile(selectedFile);
+                setErrorMessage(null);
+            } else {
+                setFile(null);
+                setErrorMessage("Please select a PDF file.");
+            }
         }
     };
 
@@ -36,6 +39,7 @@ const UploadPDF: React.FC = () => {
                 formData.append("pdf", base64Data as string);
                 formData.append("technology", technology as string);
                 console.log(formData.get('technology'));
+                setCurrentFile(reader.result as string);
                 axios.post("http://example.com/upload-pdf", formData)
                     .then((response) => {
                         console.log(response.data);
@@ -80,6 +84,7 @@ const UploadPDF: React.FC = () => {
                         id="pdf"
                         name="pdf"
                         type="file"
+                        accept="application/pdf"
                         onChange={handleFileChange}
                         className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
@@ -90,6 +95,10 @@ const UploadPDF: React.FC = () => {
                         )}
                     </div>
                 </div>
+
+                {currentFile && (
+                     <embed src={currentFile.toString()} width="300" height="500" type='application/pdf'></embed>
+                )}
 
                 <div>
                 <button

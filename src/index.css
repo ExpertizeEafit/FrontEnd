@@ -3,64 +3,51 @@
 @tailwind utilities;
 @tailwind preflight;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+.level {
+  @apply flex flex-col items-center justify-center rounded-full shadow-lg bg-white w-24 h-24 z-10 relative shadow-md border-blue-400 border-2;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.level-status {
+  @apply absolute text-xs font-bold text-gray-700 rounded-full flex items-center justify-center px-4 py-1 capitalize font-normal;
+  bottom: -12px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.lock .level-status {
+  @apply bg-gray-200 border-2 border-gray-200 shadow-lg text-gray-700;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.pending .level-status {
+  @apply bg-yellow-200 border-2 border-yellow-400 shadow-lg text-yellow-700;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.unlock .level-status {
+  @apply bg-white border-2 border-gray-200 shadow-lg text-gray-700;
+}
+
+.completed .level-status {
+  @apply bg-green-200 border-2 border-green-400 shadow-lg text-green-700;
+}
+
+.seniority-header {
+  @apply text-center font-bold text-sm uppercase w-96 mt-6;
+  background: linear-gradient(
+    136deg,
+    transparent 10%,
+    rgb(96, 165, 250, 0.5) 10%,
+    rgb(96, 165, 250, 0.5) 40%,
+    transparent 40%,
+    transparent 53%,
+    rgb(96 ,165, 250, 0.5) 53%,
+    rgb(96, 165, 250, 0.5) 71%,
+    transparent 71%
+  ),
+  rgb(46, 116, 202);
+
+  background-size: 600px 300px;
+  border-radius: 13px;
+  padding: 22px 16px;
+  row-gap: 3px;
+
+  color:rgb(39, 88, 148);
 }
