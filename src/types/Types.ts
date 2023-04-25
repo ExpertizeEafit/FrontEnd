@@ -22,6 +22,7 @@ export interface Seniority {
     requirements?: Requirement[];
     priorTo?: string[];
     style: StyleProps;
+    status: string;
     type: string;
 
 }
