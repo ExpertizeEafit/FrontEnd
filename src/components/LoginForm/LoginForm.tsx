@@ -1,5 +1,3 @@
-import React from "react";
-
 type propsField = {
     description: string,
     type: string,
@@ -13,6 +11,9 @@ type propsHeader = {
 const LoginForm = () => {
     return(
         <div id="loginform">
+            <div className="loginImage">
+                <img src="/GeekGuy.png" width="300" style={{position: 'relative'}} alt="login"/>
+            </div>
             <FormHeader title="Login" />
             <Form />
         </div>
