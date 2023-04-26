@@ -4,7 +4,7 @@ body{
   background: linear-gradient(135deg, rgb(34, 195, 139) 10%,rgba(253,187,45,1) 100%);
   background-repeat:no-repeat;
   font-family: "work sans";
-  height: 100vh;
+  height: 100%;
 }
 
 html{

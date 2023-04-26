@@ -1,14 +1,20 @@
 import { Seniority } from "../types/Types";
 import { data } from "../dummy/data";
 import axios from "axios";
+import { getCookie } from "./cookie";
 
 export const getLearning = ():Promise<Seniority[]>  => {
+
+    const userData = JSON.parse(getCookie("user") || "")
+    const { jwt } = userData
+
     return axios.get('http://localhost:8080/learning', 
     {
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            'Authorization': `Bearer ${jwt}`
         }
     }
     )
