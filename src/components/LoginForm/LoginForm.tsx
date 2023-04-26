@@ -51,8 +51,8 @@ const Form = () => {
     return (
       <div>
         <FormInput
-          description="Username"
-          placeholder="Enter your username"
+          description="ID"
+          placeholder="Enter your ID"
           type="text"
           onChange={(event:any) => setUsername(event.target.value)}
         />
