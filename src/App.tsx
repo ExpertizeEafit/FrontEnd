@@ -1,6 +1,7 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import Background from './components/FloatingCubes/FloatingCubes'
 import LoginForm from './components/LoginForm'
 import Navbar from './components/Navbar'
 import CertificatesView from './views/CertificatesView'
@@ -14,6 +15,7 @@ import TechnologiesView from './views/TechnologiesView'
 function App() {
   return (
     <div className="App">
+      <Background />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />

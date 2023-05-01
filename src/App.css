@@ -116,9 +116,10 @@ html{
 #root {
   margin: 0 auto;
   text-align: center;
-  background: linear-gradient(135deg, rgb(34, 195, 139) 10%,rgba(253,187,45,1) 100%);
+  border: red dotted; 
   height: 100%;
   min-height: 100vh;
+  background-color: rgb(34, 195, 139);
 }
 
 .logo {
