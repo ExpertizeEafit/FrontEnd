@@ -1,23 +1,52 @@
-import DataTable from "react-data-table-component";
+import DataTable, { createTheme, TableColumn } from "react-data-table-component";
+
 
 const conditionalRowStyles = [
     {
-      when: (row: { user: string; }) => row.user == 'Jguerra47',
-      style: {
-        backgroundColor: '#3478C1',
-        color: 'white',
-        '&:hover': {
-          cursor: 'pointer',
+        when: (cells: { user: string; }) => cells.user == 'Jguerra7',
+        style: {
+            backgroundColor: '#000',
+            color: 'white',
+            '&:hover': {
+                cursor: 'help',
+                color: 'red'
+            },
         },
-      },
+
     },
+    {
+        when: (row: { ranking: number; }) => row.ranking == 4,
+        style: {
+            
+        },
+    },
+    {
+        when: (row: { ranking: number; }) => row.ranking == 2,
+        style: {
+            backgroundColor: '#DFD200',
+            fontWeight: 'bold',
+            color: 'white',
+        },
+    },
+    {
+        when: (row: { ranking: number; }) => row.ranking == 3,
+        style: {
+            backgroundColor: '#DFD200',
+            fontWeight: 'bold',
+            color: 'white',
+        },
+    }
 ];
 
-const customStyles = {
+const light = {
     table:{
         style: {
-            'border':'red dotted',
-        },
+            fontSize: '50px',
+            minWidth: '400px',
+            boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+            borderBottom: '#009879 solid 6px',
+            marginBottom: '20px'
+        }
     },
     rows: {
         style: {
@@ -26,32 +55,57 @@ const customStyles = {
     },
     headCells: {
         style: {
-            'border-radius':'22px',
-            'justify-content':'center',
+            fontSize: '16px',
+            backgroundColor: '#009879',
+            color: '#ffffff',
+            justifyContent:'center',
+            fontWeight: 'bold'
         },
     },
     cells: {
         style: {
-            'justify-content':'center',
-            
+            justifyContent:'center',
         },
     },
+    pagination: {
+        style: {
+            borderRadius: '10px',
+            boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        },
+    }  
 };
 
-const columns = [
+interface DataRow {
+    id: number;
+    ranking: number;
+    user: string;
+    points: number;
+}
+
+const columns: TableColumn<DataRow>[] = [
     {
         name: 'Ranking',
-        selector: (row: { ranking: any; }) => row.ranking,
-        sortable: true
+        selector: row => row.ranking,
+        sortable: true,
+        conditionalCellStyles: [{
+                when: (cell: { ranking: number; }) => cell.ranking == 1,
+                style: {
+                    backgroundColor: '#DFD200',
+                    fontWeight: 'bold',
+                    color: 'white',
+                    borderRadius: '100%',
+                    '&:hover': "{cursor: 'help',backgroundColor: 'red',}",
+                }
+            }
+        ]
     },
     {
         name: 'User',
-        selector: (row: { user: any; }) => row.user,
-        sortable: true
+        selector: row => row.user,
     },
     {
         name: 'Points',
-        selector: (row: { points: any; }) => row.points,
+        selector: row=> row.points,
         sortable: true
     },
 ];
@@ -87,17 +141,58 @@ const data = [
         user: 'JuPrietoM',
         points: 100,
     },
+    {
+        id: 6,
+        ranking: 6,
+        user: 'Jguerra7',
+        points: 80,
+    },
+    {
+        id: 7,
+        ranking: 7,
+        user: 'Jecheverri',
+        points: 78,
+    },
+    {
+        id: 8,
+        ranking: 8,
+        user: 'MrSossa',
+        points: 77,
+    },
+    {
+        id: 9,
+        ranking: 9,
+        user: 'Jacevar',
+        points: 75,
+    },
+    {
+        id: 10,
+        ranking: 10,
+        user: 'JuPrietoM',
+        points: 60,
+    },
+    {
+        id: 11,
+        ranking: 11,
+        user: 'Jacevar',
+        points: 40,
+    },
+    {
+        id: 12,
+        ranking: 12,
+        user: 'JuPrietoM',
+        points: 20,
+    },
 ]
 
 const LeaderboardTable = () => {
     return(
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-prose rounded-xl">
             <DataTable
-                title="LEADERBOARD"
                 columns={columns}
                 data={data}
+                customStyles={light}
                 pagination
-                customStyles={customStyles}
                 conditionalRowStyles={conditionalRowStyles}
             />
         </div>
