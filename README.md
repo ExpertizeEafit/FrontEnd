@@ -1,6 +1,6 @@
 # FrontEnd
 
-# Vite: How run this project?
+# Vite: How run this project ?
 
 ## Install modules
 ```bash

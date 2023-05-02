@@ -1,13 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './../assets/react.svg'
-import viteLogo from '/vite.svg'
+import RequestTable from '../components/RequestTable';
+import UploadPDF from '../components/UploadPDF';
 
 export default function Home() {
-    const [count, setCount] = useState(0)
-
     return (
-    <div>
-        Certificates
-    </div>
+        <div className='flex flex-row'>
+            <RequestTable/>
+            <UploadPDF/>
+        </div>
     );
 }
