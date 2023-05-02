@@ -7,12 +7,8 @@ const conditionalRowStyles = [
         style: {
             backgroundColor: '#000',
             color: 'white',
-            '&:hover': {
-                cursor: 'help',
-                color: 'red'
-            },
         },
-
+        classNames: ['pruebita']
     },
     {
         when: (row: { ranking: number; }) => row.ranking == 4,
@@ -21,19 +17,27 @@ const conditionalRowStyles = [
         },
     },
     {
+        when: (row: { ranking: number; }) => row.ranking == 1,
+        style: {
+            backgroundColor: '#ffecb8',
+            fontWeight: 'bold',
+            color: '#f5bf2a',
+        },
+    },
+    {
         when: (row: { ranking: number; }) => row.ranking == 2,
         style: {
-            backgroundColor: '#DFD200',
+            backgroundColor: '#e7e7e7',
             fontWeight: 'bold',
-            color: 'white',
+            color: '#b0b0b0',
         },
     },
     {
         when: (row: { ranking: number; }) => row.ranking == 3,
         style: {
-            backgroundColor: '#DFD200',
+            backgroundColor: '#ebd4be',
             fontWeight: 'bold',
-            color: 'white',
+            color: '#db944d',
         },
     }
 ];
@@ -90,11 +94,25 @@ const columns: TableColumn<DataRow>[] = [
         conditionalCellStyles: [{
                 when: (cell: { ranking: number; }) => cell.ranking == 1,
                 style: {
-                    backgroundColor: '#DFD200',
+                    backgroundColor: '#ffdc7d',
                     fontWeight: 'bold',
-                    color: 'white',
-                    borderRadius: '100%',
-                    '&:hover': "{cursor: 'help',backgroundColor: 'red',}",
+                    borderRight: '#f5bf2a solid 1px',
+                }
+            },
+            {
+                when: (cell: { ranking: number; }) => cell.ranking == 2,
+                style: {
+                    backgroundColor: '#d0d0d0',
+                    fontWeight: 'bold',
+                    borderRight: '#b0b0b0 solid 1px',
+                }
+            },
+            {
+                when: (cell: { ranking: number; }) => cell.ranking == 3,
+                style: {
+                    backgroundColor: '#e8c39e',
+                    fontWeight: 'bold',
+                    borderRight: '#db944d solid 1px',
                 }
             }
         ]

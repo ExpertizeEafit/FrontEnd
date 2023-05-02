@@ -153,3 +153,7 @@
   @apply flex items-center justify-center;
   font-size: 14px;
 }
+
+div[role="row"].pruebita:hover {
+  background-color: rgb(164, 164, 164) !important;
+}
