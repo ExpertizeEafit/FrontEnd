@@ -12,7 +12,6 @@ const UploadPDF: React.FC = () => {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const selectedFile = event.target.files[0];
-
             if (selectedFile.type === "application/pdf") {
                 setFile(selectedFile);
                 setErrorMessage(null);
@@ -49,6 +48,11 @@ const UploadPDF: React.FC = () => {
                     });
             };
         }
+    };
+
+    const removeFile = () => {
+        setFile(null);
+        setCurrentFile(null);
     };
 
     return (
@@ -88,13 +92,14 @@ const UploadPDF: React.FC = () => {
                                 accept="application/pdf"
                                 onChange={handleFileChange} />
                         </label>
+
                         {errorMessage && (
                         <p className="mt-2 text-sm text-red-600" id="file-validation-error">
                             {errorMessage}
                         </p>
                         )}
                     </div>
-                </div>
+                </div>    
 
                 {currentFile && (
                      <embed src={currentFile.toString()} width="300" height="500" type='application/pdf'></embed>
@@ -109,6 +114,16 @@ const UploadPDF: React.FC = () => {
                     Upload
                 </button>
                 </div>
+                <div>
+                    {file && (
+                        <button onClick={() => removeFile()}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#FA654F] hover:bg-[#FAA69B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Cancel
+                        </button>
+                    )}
+                </div>
+                
             </form>
             </div>
         </div>
