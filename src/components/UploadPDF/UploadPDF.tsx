@@ -8,18 +8,15 @@ const UploadPDF: React.FC = () => {
       );
     const [technology, setTechnology] = useState<string>('Python');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [fileName, setFileName] = useState<string>("");
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const selectedFile = event.target.files[0];
             if (selectedFile.type === "application/pdf") {
                 setFile(selectedFile);
-                setFileName(selectedFile.name);
                 setErrorMessage(null);
             } else {
                 setFile(null);
-                setFileName("");
                 setErrorMessage("Please select a PDF file.");
             }
         }
@@ -54,7 +51,6 @@ const UploadPDF: React.FC = () => {
     };
 
     const removeFile = () => {
-        setFileName("");
         setFile(null);
         setCurrentFile(null);
     };
