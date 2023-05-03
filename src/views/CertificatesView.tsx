@@ -3,7 +3,7 @@ import UploadPDF from '../components/UploadPDF';
 
 export default function Home() {
     return (
-        <div className='flex flex-row'>
+        <div className='flex flex-wrap '>
             <RequestTable/>
             <UploadPDF/>
         </div>

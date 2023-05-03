@@ -53,15 +53,11 @@ const UploadPDF: React.FC = () => {
 
     return (
         <>
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Upload a new PDF</h2>
-        </div>
-
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 mx-auto w-full max-w-md">
+            <div className="bg-white py-8 px-4 shadow rounded-lg px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="technology" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="technology" className="block text-lg font-medium text-gray-700">
                         Select Technology:
                     </label>
                     <div className="mt-1">
@@ -80,14 +76,18 @@ const UploadPDF: React.FC = () => {
                         Select PDF:
                     </label>
                     <div className="mt-1">
-                        <input
-                        id="pdf"
-                        name="pdf"
-                        type="file"
-                        accept="application/pdf"
-                        onChange={handleFileChange}
-                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
+                        <label>
+                            <input type="file" className="text-sm text-grey-500
+                                file:mr-5 file:py-2 file:px-6
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-medium
+                                file:bg-[#009879] file:text-white
+                                hover:file:cursor-pointer hover:file:bg-[#0bb894]"
+                                id="pdf"
+                                name="pdf"
+                                accept="application/pdf"
+                                onChange={handleFileChange} />
+                        </label>
                         {errorMessage && (
                         <p className="mt-2 text-sm text-red-600" id="file-validation-error">
                             {errorMessage}
@@ -104,7 +104,7 @@ const UploadPDF: React.FC = () => {
                 <button
                     type="submit"
                     disabled={!file}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#009879] hover:bg-[#0bb894] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     Upload
                 </button>

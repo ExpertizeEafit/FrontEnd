@@ -116,7 +116,6 @@ html{
 #root {
   margin: 0 auto;
   text-align: center;
-  border: red dotted; 
   height: 100%;
   min-height: 100vh;
   background-color: rgb(34, 195, 139);

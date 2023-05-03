@@ -1,17 +1,28 @@
-import DataTable from "react-data-table-component";
+import DataTable, { createTheme, TableColumn } from "react-data-table-component";
+import light from "../../styles/tableStyles"
 
-const columns = [
+
+
+interface DataRow {
+    id: number;
+    tech: string;
+    upl: string;
+    status: string;
+}
+
+const columns: TableColumn<DataRow>[] = [
     {
         name: 'Technology',
-        selector: (row: { tech: any; }) => row.tech,
+        selector: row => row.tech,
     },
     {
-        name: 'Upload at',
-        selector: (row: { upl: any; }) => row.upl,
+        name: 'Upload_at',
+        selector: row => row.upl,
     },
     {
         name: 'Status',
-        selector: (row: { status: any; }) => row.status,
+        selector: row=> row.status,
+        sortable: true
     },
 ];
 
@@ -32,13 +43,13 @@ const data = [
 
 const RequestTable = () => {
     return(
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="mt-8 mx-auto w-full max-w-prose rounded-xl">
             <DataTable
-                title="Request history"
                 columns={columns}
                 data={data}
                 pagination
                 selectableRows
+                customStyles={light}
             />
         </div>
     );
