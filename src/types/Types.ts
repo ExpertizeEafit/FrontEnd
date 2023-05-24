@@ -26,3 +26,30 @@ export interface Seniority {
     type: string;
 
 }
+
+export interface RankingResponse {
+    ranking?: UserRanked[];
+    myrank?: UserRanked;
+}
+
+export interface UserRanked {
+    id: number;
+    rank: number;
+    username: string;
+    points: number;
+}
+
+export interface CertificationResponse {
+    certifications_history?: CertificationStatus[];
+    available_requirements?: Requirement[];
+}
+
+export interface CertificationStatus {
+    id: number;
+    name: string;
+    status: string;
+}
+
+export interface PendingRequestsStatus extends CertificationStatus {
+    fullname: string;
+}

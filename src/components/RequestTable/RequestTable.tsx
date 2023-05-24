@@ -1,44 +1,38 @@
-import DataTable from "react-data-table-component";
+import DataTable, { TableColumn } from "react-data-table-component";
+import light from "../../styles/tableStyles";
+import { CertificationStatus } from "../../types/Types";
 
-const columns = [
+
+
+interface DataRow {
+    id: number;
+    name: string;
+    status: string;
+}
+
+const columns: TableColumn<DataRow>[] = [
     {
         name: 'Technology',
-        selector: (row: { tech: any; }) => row.tech,
-    },
-    {
-        name: 'Upload at',
-        selector: (row: { upl: any; }) => row.upl,
+        selector: (row: { name: any; }) => row.name,
     },
     {
         name: 'Status',
-        selector: (row: { status: any; }) => row.status,
+        selector: row=> row.status,
+        sortable: true
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        tech: 'Python',
-        upl: '25/04/2023',
-        status: 'REJECTED',
-    },
-    {
-        id: 2,
-        tech: 'Python',
-        upl: '26/04/2023',
-        status: 'ACCEPTED',
-    },
-]
+const RequestTable = ({ loading, certificationsHistory }: { loading:boolean, certificationsHistory: CertificationStatus[] | any}) => {
 
-const RequestTable = () => {
     return(
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="mt-8 mx-auto w-full max-w-prose rounded-xl">
             <DataTable
-                title="Request history"
                 columns={columns}
-                data={data}
+                data={certificationsHistory}
                 pagination
                 selectableRows
+                customStyles={light}
+                progressPending={loading}
             />
         </div>
     );

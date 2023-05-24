@@ -4,7 +4,6 @@
 @tailwind utilities;
 @tailwind preflight;
 
-
 * {
   font-family: 'Proxima Nova', sans-serif;
 }
@@ -61,15 +60,15 @@
   background: linear-gradient(
     136deg,
     transparent 10%,
-    rgb(96, 165, 250, 0.5) 10%,
-    rgb(96, 165, 250, 0.5) 40%,
+    rgba(0, 152, 121, 0.5) 10%,
+    rgba(0, 152, 121, 0.5) 40%,
     transparent 40%,
     transparent 53%,
-    rgb(96 ,165, 250, 0.5) 53%,
-    rgb(96, 165, 250, 0.5) 71%,
+    rgba(0, 152, 121, 0.5) 53%,
+    rgba(0, 152, 121, 0.5 ) 71%,
     transparent 71%
   ),
-  rgb(46, 116, 202);
+  rgb(5, 106, 86);
 
   width: 700px;
   background-size: 600px 300px;
@@ -78,7 +77,7 @@
   padding: 22px 16px;
   row-gap: 3px;
 
-  color:rgb(39, 88, 148);
+  color:rgb(225, 225, 225);
 }
 
 .seniority-header.Locked {
@@ -156,4 +155,20 @@
 
 div[role="row"].pruebita:hover {
   background-color: rgb(164, 164, 164) !important;
+}
+
+.username-span {
+  position: absolute;
+  background: rgb(0, 152, 121);
+  color: white;
+  border-radius: 12px;
+  font-size: 12px;
+  padding: 2px 4px;
+  bottom: -20px;
+}
+
+.navbar-username {
+  position: relative;
+  justify-content: center!important;
+  align-items: center;
 }

@@ -1,21 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
+import { uploadCertification } from "../../api/certification";
+import { Requirement } from "../../types/Types";
 
-const UploadPDF: React.FC = () => {
+const UploadPDF: React.FC<{handleUpdate: () => void, availableRequirements: Requirement[] | undefined}> = ({ handleUpdate, availableRequirements }) => {
     const [file, setFile] = useState<File | null>(null);
     const [currentFile, setCurrentFile] = useState<string | ArrayBuffer | null>(
         null
       );
-    const [technology, setTechnology] = useState<string>('Python');
+    const fileRef = useRef(null);
+    const [technology, setTechnology] = useState<string>('1');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const selectedFile = event.target.files[0];
-
             if (selectedFile.type === "application/pdf") {
                 setFile(selectedFile);
                 setErrorMessage(null);
+
+                const reader = new FileReader();
+                reader.readAsDataURL(selectedFile);
+                reader.onload = () => {
+                    setCurrentFile(reader.result as string);
+                };
             } else {
                 setFile(null);
                 setErrorMessage("Please select a PDF file.");
@@ -31,37 +39,31 @@ const UploadPDF: React.FC = () => {
         event.preventDefault();
 
         if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const base64Data = reader.result?.toString().split(",")[1];
-                const formData = new FormData();
-                formData.append("pdf", base64Data as string);
-                formData.append("technology", technology as string);
-                console.log(formData.get('technology'));
-                setCurrentFile(reader.result as string);
-                axios.post("http://example.com/upload-pdf", formData)
-                    .then((response) => {
-                        console.log(response.data);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            };
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("requirement_id", technology as string);
+            console.log(formData.get('requirement_id'));
+            uploadCertification(formData)
+            handleUpdate();
+        }
+    };
+
+    const removeFile = (target:any) => {
+        setFile(null);
+        setCurrentFile(null);
+        
+        if(fileRef && fileRef.current) {
+            fileRef.current.value = "";
         }
     };
 
     return (
         <>
-        <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Upload a new PDF</h2>
-        </div>
-
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="mt-8 mx-auto w-full max-w-md">
+            <div className="bg-white py-8 px-4 shadow rounded-lg px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="technology" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="technology" className="block text-lg font-medium text-gray-700">
                         Select Technology:
                     </label>
                     <div className="mt-1">
@@ -71,30 +73,39 @@ const UploadPDF: React.FC = () => {
                             onChange={handleTechnologyChange}
                             className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         >
-                            <option value="Python">Python</option>
-                            <option value="Java">Java</option>
-                            <option value="SQL">SQL</option>
+                            {
+                                availableRequirements?.map(requirement => (<option value={requirement.id}>
+                                    {requirement.name}
+                                </option>))
+                            }
                         </select>
                     </div>
                     <label htmlFor="pdf" className="block text-sm font-medium text-gray-700">
                         Select PDF:
                     </label>
                     <div className="mt-1">
-                        <input
-                        id="pdf"
-                        name="pdf"
-                        type="file"
-                        accept="application/pdf"
-                        onChange={handleFileChange}
-                        className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
+                        <label>
+                            <input type="file" className="text-sm text-grey-500
+                                file:mr-5 file:py-2 file:px-6
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-medium
+                                file:bg-[#009879] file:text-white
+                                hover:file:cursor-pointer hover:file:bg-[#0bb894]"
+                                id="pdf"
+                                name="pdf"
+                                accept="application/pdf"
+                                onChange={handleFileChange} 
+                                ref={fileRef}
+                                />
+                        </label>
+
                         {errorMessage && (
                         <p className="mt-2 text-sm text-red-600" id="file-validation-error">
                             {errorMessage}
                         </p>
                         )}
                     </div>
-                </div>
+                </div>    
 
                 {currentFile && (
                      <embed src={currentFile.toString()} width="300" height="500" type='application/pdf'></embed>
@@ -104,11 +115,21 @@ const UploadPDF: React.FC = () => {
                 <button
                     type="submit"
                     disabled={!file}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#009879] hover:bg-[#0bb894] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                     Upload
                 </button>
                 </div>
+                <div>
+                    {file && (
+                        <button onClick={(event) => removeFile(event.target)}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#FA654F] hover:bg-[#FAA69B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        >
+                            Cancel
+                        </button>
+                    )}
+                </div>
+                
             </form>
             </div>
         </div>

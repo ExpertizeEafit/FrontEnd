@@ -14,7 +14,7 @@ html{
   max-height: 700px;
   width: 30%;
   height: 60%;
-  margin: 100px auto;
+  margin: 30px auto;
   background-color: #FFFFFF;
   border-radius: 25px;
 }
@@ -116,7 +116,6 @@ html{
 #root {
   margin: 0 auto;
   text-align: center;
-  border: red dotted; 
   height: 100%;
   min-height: 100vh;
   background-color: rgb(34, 195, 139);
@@ -156,4 +155,9 @@ html{
 
 .read-the-docs {
   color: #888;
+}
+
+select {
+  padding: 4px 4px!important;
+  border: 1px solid whitesmoke;
 }

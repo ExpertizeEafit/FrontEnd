@@ -20,7 +20,7 @@ const LoginForm = () => {
 
     useEffect( () => {
         if(getCookie("user")) {
-            history("/")
+            history("/certificates")
         }
     }, [])
 
@@ -42,14 +42,28 @@ const FormHeader = (props: propsHeader)  => (
 const Form = () => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState(null);
+    const history = useNavigate()
 
     const handleSubmit = (event:any) => {
-        const response = login({ username, password }) as any;
+        const response = login({ dni: username, password }) as any;
+        response.then( (data:any) => {
+            history("/certificates")
+        }).catch((data:any) => {
+            setError(error)
+            console.log(data)
+        })
+        
     }
 
 
     return (
       <div>
+        {
+            error && 
+                <span>{error}</span>
+            
+        }
         <FormInput
           description="ID"
           placeholder="Enter your ID"

@@ -1,13 +1,13 @@
-import { Seniority } from "../types/Types";
+import { RankingResponse } from "../types/Types";
 import axios from "axios";
 import { getCookie } from "./cookie";
 
-export const getLearning = ():Promise<Seniority[]>  => {
+export const getRanking = ():Promise<RankingResponse>  => {
 
     const userData = JSON.parse(getCookie("user") || "")
     const { token, id } = userData
 
-    return axios.get(`http://localhost:80/learning/${id}`, 
+    return axios.get(`http://localhost:80/ranking/${id}`, 
     {
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const getLearning = ():Promise<Seniority[]>  => {
     }
     )
     .then(response => {
-        return response.data.learning_path;
+        return response.data
     })
     .catch(error => {
         console.log(error);
