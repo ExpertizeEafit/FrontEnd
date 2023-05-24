@@ -8,7 +8,7 @@ const UploadPDF: React.FC<{handleUpdate: () => void, availableRequirements: Requ
     const [currentFile, setCurrentFile] = useState<string | ArrayBuffer | null>(
         null
       );
-    const fileRef = useRef(null);
+    const fileRef = useRef<HTMLInputElement>(null);
     const [technology, setTechnology] = useState<string>('1');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
