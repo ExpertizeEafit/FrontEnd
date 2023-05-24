@@ -1,18 +1,16 @@
-import { Seniority } from "../types/Types";
+import { CertificationResponse, PendingRequestsStatus, Seniority } from "../types/Types";
 import axios from "axios";
 import { getCookie } from "./cookie";
 
-export const getCertificationRequests = ():Promise<any[]>  => {
+export const getCertificationRequests = ():Promise<CertificationResponse>  => {
 
     const userData = JSON.parse(getCookie("user") || "{}")
-    const { jwt, user_id } = userData
-    return axios.get(`http://localhost:8081/file/getAllRequests/${user_id}`, 
+    const { token, id } = userData
+    return axios.get(`http://localhost:80/certifications/${id}`, 
     {
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            'Authorization': `Bearer ${jwt}`
+            'Authorization': `Bearer ${token}`
         }
     }
     )
@@ -27,14 +25,53 @@ export const getCertificationRequests = ():Promise<any[]>  => {
 export const uploadCertification = (data: FormData):Promise<any[]>  => {
 
     const userData = JSON.parse(getCookie("user") || "{}")
-    const { jwt, user_id } = userData
-    data.append("user_id", user_id)
-    return axios.post('http://localhost:8081/file/saveRequest', data,
+    const { token, id} = userData
+    data.append("user_id", id)
+    return axios.post('http://localhost:80/certifications/upload', data,
     {
         headers: {
             'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        return [];
+    });
+}
+
+export const getPendingRequests = ():Promise<PendingRequestsStatus[]>  => {
+
+    const userData = JSON.parse(getCookie("user") || "{}")
+    const { token } = userData
+    return axios.get(`http://localhost:80/certifications/pending`, 
+    {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    }
+    )
+    .then(response => {
+        return response.data;
+    })
+    .catch(error => {
+        return [];
+    });
+}
+
+export const updateRequestStatus = (data:any):Promise<any>  => {
+
+    const userData = JSON.parse(getCookie("user") || "{}")
+    const { token } = userData
+    return axios.put(`http://localhost:80/certifications/update`, data,
+    {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         }
     }
     )

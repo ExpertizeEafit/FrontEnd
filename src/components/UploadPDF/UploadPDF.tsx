@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { uploadCertification } from "../../api/certification";
+import { Requirement } from "../../types/Types";
 
-const UploadPDF: React.FC<{handleUpdate: () => void}> = ({ handleUpdate }) => {
+const UploadPDF: React.FC<{handleUpdate: () => void, availableRequirements: Requirement[] | undefined}> = ({ handleUpdate, availableRequirements }) => {
     const [file, setFile] = useState<File | null>(null);
     const [currentFile, setCurrentFile] = useState<string | ArrayBuffer | null>(
         null
@@ -72,9 +73,11 @@ const UploadPDF: React.FC<{handleUpdate: () => void}> = ({ handleUpdate }) => {
                             onChange={handleTechnologyChange}
                             className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         >
-                            <option value="1">Python</option>
-                            <option value="2">Java</option>
-                            <option value="3">C++</option>
+                            {
+                                availableRequirements?.map(requirement => (<option value={requirement.id}>
+                                    {requirement.name}
+                                </option>))
+                            }
                         </select>
                     </div>
                     <label htmlFor="pdf" className="block text-sm font-medium text-gray-700">

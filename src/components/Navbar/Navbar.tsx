@@ -33,15 +33,20 @@ function classNames(...classes: string[]) {
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [username, setUsername] = useState("");
+  const [role, setRole] = useState("");
   const history = useNavigate()
 
   useEffect( () => {
 
     const userData = JSON.parse(getCookie("user") || "{}")
+    
    if (userData) {
-      const { jwt, username } = userData
+      const { jwt, username, rol } = userData
 
       setUsername(username)
+      setRole(rol)
+   } else {
+      history("/login")
    }
 
     return () => {}
@@ -67,21 +72,27 @@ export default function Example() {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <Link to="/seniorities" className="text-sm font-semibold leading-6 text-gray-900">
+          { role == "user" &&  <Link to="/seniorities" className="text-sm font-semibold leading-6 text-gray-900">
             Seniorities
-          </Link>
+          </Link> }
           {/* <Link to="/technologies" className="text-sm font-semibold leading-6 text-gray-900">
             Technologies
           </Link> */}
-          <Link to="/leaderboard" className="text-sm font-semibold leading-6 text-gray-900">
+          { role == "user" && <Link to="/leaderboard" className="text-sm font-semibold leading-6 text-gray-900">
             Leaderboard
-          </Link>
-          <Link to="/certificates" className="text-sm font-semibold leading-6 text-gray-900">
+          </Link> }
+          { role == "user" && <Link to="/certificates" className="text-sm font-semibold leading-6 text-gray-900">
             My certificates
-          </Link>
+          </Link> }
           {/* <Link to="/progress" className="text-sm font-semibold leading-6 text-gray-900">
             My progress
           </Link> */}
+          { role == "admin" && <Link to="/pending_requests" className="text-sm font-semibold leading-6 text-gray-900">
+            Requests
+          </Link> }
+          <Link to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+            My profile
+          </Link>
         </Popover.Group>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end navbar-username">

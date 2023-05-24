@@ -11,6 +11,7 @@ import ProfileView from './views/ProfileView'
 import ProgressView from './views/ProgressView'
 import SeniorityView from './views/SeniorityView'
 import TechnologiesView from './views/TechnologiesView'
+import PendingRequestsView from './views/PendingRequestsView'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/certificates' element={<CertificatesView/>} />
         <Route path='/progress' element={<ProgressView/>} />
         <Route path='/profile' element={<ProfileView/>} />
+        <Route path='/pending_requests' element={<PendingRequestsView/>} />
         <Route path='/login' element={<LoginForm/>} />
       </Routes>
     </div>

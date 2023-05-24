@@ -156,3 +156,8 @@ html{
 .read-the-docs {
   color: #888;
 }
+
+select {
+  padding: 4px 4px!important;
+  border: 1px solid whitesmoke;
+}

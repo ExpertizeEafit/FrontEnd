@@ -46,12 +46,12 @@ const Form = () => {
     const history = useNavigate()
 
     const handleSubmit = (event:any) => {
-        const response = login({ username, password }) as any;
+        const response = login({ dni: username, password }) as any;
         response.then( (data:any) => {
             history("/certificates")
         }).catch((data:any) => {
             setError(error)
-            console.log(error)
+            console.log(data)
         })
         
     }
