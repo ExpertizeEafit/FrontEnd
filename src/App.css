@@ -89,6 +89,17 @@ html{
   transition: opacity 0.25s ease-out;
 }
 
+.form-button button {
+  border-radius: 25px;
+  color: white;
+  font-weight: 700;
+  background: rgb(34,195,139);
+  
+  border: 0px;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+}
+
 .row button:hover{
   opacity: 0.8;
 }

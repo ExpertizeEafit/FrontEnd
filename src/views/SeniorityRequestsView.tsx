@@ -1,35 +1,30 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { getPendingRequests, updateRequestStatus } from "../api/certification";
-import { PendingRequestsStatus } from "../types/Types";
+import { createSeniorityRequestStatus, getSeniorityRequests, updateRequestStatus, updateSeniorityRequestStatus } from "../api/certification";
+import { SeniorityRequestStatus } from "../types/Types";
 import DataTable, { TableColumn } from "react-data-table-component";
 import light from "../styles/tableStyles";
-import { Link } from "react-router-dom";
 
 interface DataRow {
   id: number;
   name: string;
-  status: string;
-  fullname: string;
+  last_name: string;
+  seniority: string;
 }
 
 const columns: TableColumn<DataRow>[] = [
   {
-    name: "Technology",
-    selector: (row: { name: any }) => row.name,
+    name: "Seniority",
+    selector: (row: { seniority: any }) => row.seniority,
   },
   {
     name: "Status",
-    selector: (row) => row.status,
+    selector: (row) => "PENDING",
     sortable: true,
   },
   {
     name: "Name",
-    selector: (row) =>
-      row.fullname
-        .split(" ")
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" "),
+    selector: (row) => row.name + " " + row.last_name,
     sortable: true,
   },
   {
@@ -41,11 +36,11 @@ const columns: TableColumn<DataRow>[] = [
 ];
 
 export default function Home() {
-  const [data, setData] = useState<PendingRequestsStatus[]>([]);
+  const [data, setData] = useState<SeniorityRequestStatus[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const data = getPendingRequests();
+    const data = getSeniorityRequests();
     data.then((data) => {
       setData(data);
       setLoading(false);
@@ -80,7 +75,7 @@ const ApiButton = ({ id }: { id: number }) => {
       };
   
       // Llamar al método updateStatus con el objeto requestData
-      updateRequestStatus(requestData);
+      updateSeniorityRequestStatus(requestData)
     };
   
     return (

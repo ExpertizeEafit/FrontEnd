@@ -53,3 +53,10 @@ export interface CertificationStatus {
 export interface PendingRequestsStatus extends CertificationStatus {
     fullname: string;
 }
+
+export interface SeniorityRequestStatus {
+    id: number;
+    name: string;
+    last_name: string;
+    seniority: string;
+}

@@ -88,7 +88,10 @@ export default function Example() {
             My progress
           </Link> */}
           { role == "admin" && <Link to="/pending_requests" className="text-sm font-semibold leading-6 text-gray-900">
-            Requests
+           Requirement Requests
+          </Link> }
+          { role == "admin" && <Link to="/seniority_requests" className="text-sm font-semibold leading-6 text-gray-900">
+            Seniority Requests
           </Link> }
           <Link to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
             My profile
