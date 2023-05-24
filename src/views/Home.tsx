@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import reactLogo from './../assets/react.svg'
 import viteLogo from '/vite.svg'
+import Navbar from '../components/Navbar';
 
 export default function Home() {
     const [count, setCount] = useState<number>(0)
 
     return (
+        <>
+      <Navbar />
     <div>
         <div>
             <a href="https://vitejs.dev" target="_blank">
@@ -28,5 +31,7 @@ export default function Home() {
         Click on the Vite and React logos to learn more
         </p>
     </div>
+
+    </>
     );
 }

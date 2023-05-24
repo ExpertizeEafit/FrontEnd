@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
+import { uploadCertification } from "../../api/certification";
 
-const UploadPDF: React.FC = () => {
+const UploadPDF: React.FC<{handleUpdate: () => void}> = ({ handleUpdate }) => {
     const [file, setFile] = useState<File | null>(null);
     const [currentFile, setCurrentFile] = useState<string | ArrayBuffer | null>(
         null
       );
-    const [technology, setTechnology] = useState<string>('Python');
+    const fileRef = useRef(null);
+    const [technology, setTechnology] = useState<string>('1');
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,6 +17,12 @@ const UploadPDF: React.FC = () => {
             if (selectedFile.type === "application/pdf") {
                 setFile(selectedFile);
                 setErrorMessage(null);
+
+                const reader = new FileReader();
+                reader.readAsDataURL(selectedFile);
+                reader.onload = () => {
+                    setCurrentFile(reader.result as string);
+                };
             } else {
                 setFile(null);
                 setErrorMessage("Please select a PDF file.");
@@ -30,29 +38,22 @@ const UploadPDF: React.FC = () => {
         event.preventDefault();
 
         if (file) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const base64Data = reader.result?.toString().split(",")[1];
-                const formData = new FormData();
-                formData.append("pdf", base64Data as string);
-                formData.append("technology", technology as string);
-                console.log(formData.get('technology'));
-                setCurrentFile(reader.result as string);
-                axios.post("http://example.com/upload-pdf", formData)
-                    .then((response) => {
-                        console.log(response.data);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            };
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("requirement_id", technology as string);
+            console.log(formData.get('requirement_id'));
+            uploadCertification(formData)
+            handleUpdate();
         }
     };
 
-    const removeFile = () => {
+    const removeFile = (target:any) => {
         setFile(null);
         setCurrentFile(null);
+        
+        if(fileRef && fileRef.current) {
+            fileRef.current.value = "";
+        }
     };
 
     return (
@@ -71,9 +72,9 @@ const UploadPDF: React.FC = () => {
                             onChange={handleTechnologyChange}
                             className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         >
-                            <option value="Python">Python</option>
-                            <option value="Java">Java</option>
-                            <option value="SQL">SQL</option>
+                            <option value="1">Python</option>
+                            <option value="2">Java</option>
+                            <option value="3">C++</option>
                         </select>
                     </div>
                     <label htmlFor="pdf" className="block text-sm font-medium text-gray-700">
@@ -90,7 +91,9 @@ const UploadPDF: React.FC = () => {
                                 id="pdf"
                                 name="pdf"
                                 accept="application/pdf"
-                                onChange={handleFileChange} />
+                                onChange={handleFileChange} 
+                                ref={fileRef}
+                                />
                         </label>
 
                         {errorMessage && (
@@ -116,7 +119,7 @@ const UploadPDF: React.FC = () => {
                 </div>
                 <div>
                     {file && (
-                        <button onClick={() => removeFile()}
+                        <button onClick={(event) => removeFile(event.target)}
                         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#FA654F] hover:bg-[#FAA69B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         >
                             Cancel

@@ -1,23 +1,25 @@
-import DataTable, { createTheme, TableColumn } from "react-data-table-component";
-import light from "../../styles/tableStyles"
+import DataTable, { TableColumn } from "react-data-table-component";
+import { getCertificationRequests } from "../../api/certification";
+import { useState, useEffect } from "react";
+import light from "../../styles/tableStyles";
 
 
 
 interface DataRow {
     id: number;
-    tech: string;
-    upl: string;
+    name: string;
+    last_update: string;
     status: string;
 }
 
 const columns: TableColumn<DataRow>[] = [
     {
         name: 'Technology',
-        selector: row => row.tech,
+        selector: (row: { name: any; }) => row.name,
     },
     {
-        name: 'Upload_at',
-        selector: row => row.upl,
+        name: 'Upload at',
+        selector: (row: { last_update: any; }) => row.last_update,
     },
     {
         name: 'Status',
@@ -26,22 +28,19 @@ const columns: TableColumn<DataRow>[] = [
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        tech: 'Python',
-        upl: '25/04/2023',
-        status: 'REJECTED',
-    },
-    {
-        id: 2,
-        tech: 'Python',
-        upl: '26/04/2023',
-        status: 'ACCEPTED',
-    },
-]
+const RequestTable = ({ updateHistory }: { updateHistory: boolean}) => {
+    const [data, setData] = useState<any>([]);
+    const [pending, setPending] = useState<any>(true);
 
-const RequestTable = () => {
+    useEffect( () => {
+        const data = getCertificationRequests();
+        data.then(data => {
+            data.forEach( (el, index) => el.id = index)
+            setData(data)
+            setPending(false);
+        })
+    }, [updateHistory])
+
     return(
         <div className="mt-8 mx-auto w-full max-w-prose rounded-xl">
             <DataTable
@@ -50,6 +49,7 @@ const RequestTable = () => {
                 pagination
                 selectableRows
                 customStyles={light}
+                progressPending={pending}
             />
         </div>
     );

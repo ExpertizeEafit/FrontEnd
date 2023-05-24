@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import {
   ArrowPathIcon,
@@ -11,7 +11,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import IconButton from '../IconButton'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { getCookie, removeCookie } from '../../api/cookie'
 
 const products = [
   { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
@@ -31,6 +32,20 @@ function classNames(...classes: string[]) {
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [username, setUsername] = useState("");
+  const history = useNavigate()
+
+  useEffect( () => {
+
+    const userData = JSON.parse(getCookie("user") || "{}")
+   if (userData) {
+      const { jwt, username } = userData
+
+      setUsername(username)
+   }
+
+    return () => {}
+  })
 
   return (
     <header className="bg-white">
@@ -55,22 +70,26 @@ export default function Example() {
           <Link to="/seniorities" className="text-sm font-semibold leading-6 text-gray-900">
             Seniorities
           </Link>
-          <Link to="/technologies" className="text-sm font-semibold leading-6 text-gray-900">
+          {/* <Link to="/technologies" className="text-sm font-semibold leading-6 text-gray-900">
             Technologies
-          </Link>
+          </Link> */}
           <Link to="/leaderboard" className="text-sm font-semibold leading-6 text-gray-900">
             Leaderboard
           </Link>
           <Link to="/certificates" className="text-sm font-semibold leading-6 text-gray-900">
             My certificates
           </Link>
-          <Link to="/progress" className="text-sm font-semibold leading-6 text-gray-900">
+          {/* <Link to="/progress" className="text-sm font-semibold leading-6 text-gray-900">
             My progress
-          </Link>
+          </Link> */}
         </Popover.Group>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <IconButton imageUrl="https://s.yimg.com/ny/api/res/1.2/LRESSShwNplSJ7gFxqHtmQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3Nw--/https://media.zenfs.com/en/homerun/feed_manager_auto_publish_494/5f2acfff720e9a2c822eaa0b4f37e3dd" altText="user profile" onClick={() => console.log('Going to profile')}/>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end navbar-username">
+            <IconButton imageUrl="https://s.yimg.com/ny/api/res/1.2/LRESSShwNplSJ7gFxqHtmQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQ3Nw--/https://media.zenfs.com/en/homerun/feed_manager_auto_publish_494/5f2acfff720e9a2c822eaa0b4f37e3dd" altText="user profile" onClick={() => {
+              removeCookie("user")
+              history("/login")
+            }}/>
+            <span className="username-span">{username}</span>
         </div>
         
       </nav>

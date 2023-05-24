@@ -16,7 +16,6 @@ function App() {
   return (
     <div className="App">
       <Background />
-      <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/seniorities' element={<SeniorityView/>} />
