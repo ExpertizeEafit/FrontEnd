@@ -93,6 +93,9 @@ export default function Example() {
           { role == "admin" && <Link to="/seniority_requests" className="text-sm font-semibold leading-6 text-gray-900">
             Seniority Requests
           </Link> }
+          { role == "admin" && <Link to="/register_users" className="text-sm font-semibold leading-6 text-gray-900">
+            Register Users
+          </Link> }
           <Link to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
             My profile
           </Link>

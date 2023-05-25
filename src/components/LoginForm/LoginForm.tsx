@@ -19,8 +19,13 @@ const LoginForm = () => {
     const history = useNavigate()
 
     useEffect( () => {
-        if(getCookie("user")) {
-            history("/certificates")
+        const user = JSON.parse(getCookie("user") || "{}");
+        if (user.rol) {
+            if(user.rol == "") {
+                history("/certificates")
+            } else {
+                history("/pending_requests")
+            }
         }
     }, [])
 
@@ -47,8 +52,14 @@ const Form = () => {
 
     const handleSubmit = (event:any) => {
         const response = login({ dni: username, password }) as any;
-        response.then( (data:any) => {
-            history("/certificates")
+        response.then( (user:any) => {
+            if (user.rol) {
+                if(user.rol == "") {
+                    history("/certificates")
+                } else {
+                    history("/pending_requests")
+                }
+            }
         }).catch((data:any) => {
             setError(error)
             console.log(data)

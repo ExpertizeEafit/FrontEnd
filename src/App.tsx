@@ -13,6 +13,7 @@ import SeniorityView from './views/SeniorityView'
 import TechnologiesView from './views/TechnologiesView'
 import PendingRequestsView from './views/PendingRequestsView'
 import SeniorityRequestsView from './views/SeniorityRequestsView'
+import RegisterUsersView from './components/RegisterUsersView/RegisterUsersView'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path='/profile' element={<ProfileView/>} />
         <Route path='/pending_requests' element={<PendingRequestsView/>} />
         <Route path='/seniority_requests' element={<SeniorityRequestsView/>} />
+        <Route path='/register_users' element={<RegisterUsersView/>} />
         <Route path='/login' element={<LoginForm/>} />
       </Routes>
     </div>

@@ -7,7 +7,7 @@ export const getLearning = ():Promise<Seniority[]>  => {
     const userData = JSON.parse(getCookie("user") || "")
     const { token, id } = userData
 
-    return axios.get(`http://34.29.188.95:80/learning/${id}`, 
+    return axios.get(`http://localhost:80/learning/${id}`, 
     {
         headers: {
             'Content-Type': 'application/json',
