@@ -7,7 +7,7 @@ export const getRanking = ():Promise<RankingResponse>  => {
     const userData = JSON.parse(getCookie("user") || "")
     const { token, id } = userData
 
-    return axios.get(`http://localhost:80/ranking/${id}`, 
+    return axios.get(`http://34.70.104.176/ranking/${id}`, 
     {
         headers: {
             'Content-Type': 'application/json',

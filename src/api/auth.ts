@@ -5,7 +5,7 @@ const NO_AUTH = 401;
 const BAD_REQUEST = 400;
 
 export const login = (data:any):Promise<any>  => {
-    return axios.post('http://localhost:80/login', data, 
+    return axios.post('http://34.70.104.176/login', data, 
     {
         headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export const changePassword = (data:any):Promise<any>  => {
     const { token, id } = userData
     data.id = id;
     
-    return axios.post('http://localhost:80/user/change_password', data, 
+    return axios.post('http://34.70.104.176/user/change_password', data, 
     {
         headers: {
             'Content-Type': 'application/json',
