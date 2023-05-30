@@ -14,7 +14,7 @@ export default function Home() {
 
     // Validar la contraseña antes de enviar el formulario
     if (newPassword !== confirmPassword) {
-      setPasswordError('Las contraseñas no coinciden');
+      setPasswordError('Passwords do not match');
     } else {
       setPasswordError('');
       // Enviar el formulario o realizar otras acciones
@@ -30,11 +30,12 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="bg-white p-8 border-t">
-        <h2 className="text-2xl font-bold mb-4">Cambiar Contraseña</h2>
+      <div className="mt-8 mx-auto w-full max-w-md">
+            <div className="bg-white py-8 px-4 shadow rounded-lg px-10">
+        <h2 className="text-2xl font-bold mb-4">Change Password</h2>
         <form onSubmit={handleFormSubmit}>
         <div className="mb-4">
-            <label htmlFor="currentPassword" className="block mb-2">Contraseña Actual:</label>
+            <label htmlFor="currentPassword" className="block mb-2">Current Password:</label>
             <input
               type="password"
               id="currentPassword"
@@ -44,7 +45,7 @@ export default function Home() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="newPassword" className="block mb-2">Contraseña Nueva:</label>
+            <label htmlFor="newPassword" className="block mb-2">New Password:</label>
             <input
               type="password"
               id="newPassword"
@@ -54,7 +55,7 @@ export default function Home() {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="confirmPassword" className="block mb-2">Reintenta la Contraseña Nueva:</label>
+            <label htmlFor="confirmPassword" className="block mb-2">Confirm the new password:</label>
             <input
               type="password"
               id="confirmPassword"
@@ -64,10 +65,11 @@ export default function Home() {
             />
           </div>
           {passwordError && <p className="text-red-500 mb-4">{passwordError}</p>}
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            Enviar
+          <button type="submit" className="bg-[#009879] hover:bg-[#0bb894] text-white px-4 py-2 rounded">
+            Submit
           </button>
         </form>
+      </div>
       </div>
     </>
   );
