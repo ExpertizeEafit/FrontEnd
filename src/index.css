@@ -172,3 +172,8 @@ div[role="row"].pruebita:hover {
   justify-content: center!important;
   align-items: center;
 }
+
+@keyframes fondo-movimiento {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
