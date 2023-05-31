@@ -90,9 +90,9 @@ export default function Example() {
           { role == "admin" && <Link to="/pending_requests" className="text-sm font-semibold leading-6 text-gray-900">
             Requests
           </Link> }
-          <Link to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
+          { (role == "admin" || role == "user") && <Link to="/profile" className="text-sm font-semibold leading-6 text-gray-900">
             My profile
-          </Link>
+          </Link> }
         </Popover.Group>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end navbar-username">
