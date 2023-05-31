@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar';
 import { getCookie } from '../api/cookie';
 import { changePassword } from '../api/auth';
+import Title from '../components/Title/Title';
 
 export default function Home() {
     const [newPassword, setNewPassword] = useState('');
@@ -30,6 +31,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <Title title="My profile settings"/>
       <div className="mt-8 mx-auto w-full max-w-md">
             <div className="bg-white py-8 px-4 shadow rounded-lg px-10">
         <h2 className="text-2xl font-bold mb-4">Change Password</h2>

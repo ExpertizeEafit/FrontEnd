@@ -4,6 +4,7 @@ import UploadPDF from '../components/UploadPDF';
 import Navbar from '../components/Navbar';
 import { getCertificationRequests } from '../api/certification';
 import { CertificationResponse } from '../types/Types';
+import Title from '../components/Title/Title';
 
 export default function Home() {
     const [updateHistory, setUpdateHistory] = useState<boolean>(false);
@@ -25,7 +26,7 @@ export default function Home() {
     return (
         <>
         <Navbar />
-        
+        <Title title="My certificates"/>
         <div className='flex flex-wrap '>
             <RequestTable loading={loading} certificationsHistory={data.certifications_history}/>
             <UploadPDF handleUpdate={handleUpload} availableRequirements={data.available_requirements}/>

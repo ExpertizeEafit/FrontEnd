@@ -20,7 +20,7 @@ const LoginForm = () => {
 
     useEffect( () => {
         if(getCookie("user")) {
-            history("/certificates")
+            history("/")
         }
     }, [])
 
@@ -48,7 +48,7 @@ const Form = () => {
     const handleSubmit = (event:any) => {
         const response = login({ dni: username, password }) as any;
         response.then( (data:any) => {
-            history("/certificates")
+            history("/")
         }).catch((data:any) => {
             setError(error)
             console.log(data)
