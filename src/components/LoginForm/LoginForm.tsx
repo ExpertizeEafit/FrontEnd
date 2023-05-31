@@ -7,6 +7,7 @@ type propsField = {
     description: string,
     type: string,
     placeholder: string
+    name: string
     onChange?: (event: any) => void;
 }
 
@@ -68,12 +69,14 @@ const Form = () => {
           description="ID"
           placeholder="Enter your ID"
           type="text"
+          name="ID"
           onChange={(event:any) => setUsername(event.target.value)}
         />
         <FormInput
           description="Password"
           placeholder="Enter your password"
           type="password"
+          name="password"
           onChange={(event:any) => setPassword(event.target.value)}
         />
         <FormButton title="Log in" onClick={handleSubmit}/>
@@ -90,7 +93,7 @@ const FormButton = (props: propsHeader) => (
 const FormInput = (props: propsField) => (
     <div className="row">
         <label>{props.description}</label>
-        <input type={props.type} placeholder={props.placeholder} onChange={props.onChange}/>
+        <input type={props.type} name={props.name} placeholder={props.placeholder} onChange={props.onChange}/>
     </div>  
 );
 
