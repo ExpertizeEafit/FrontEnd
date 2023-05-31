@@ -26,17 +26,41 @@ export default function Home() {
     return (
     <>
         <Navbar />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet"></link>
         <div className="mt-32 mx-auto w-screen max-w-7xl">
             <div className='bg-white h-[42rem] rounded-lg p-8 shadow-xl overflow-hidden relative'>
                 <img className='absolute w-screen grayscale opacity-5' src='https://cuevista.com/wp-content/uploads/2019/05/Technologies.png'/>
                 
-                <div className='relative mt-32'>
-                    <h1 className="text-9xl font-bold text-teal-500 mb-8">Expertize</h1>
-                    <p className="text-xl font-bold text-gray-700 mb-8">Expertize platform offers a comprehensive and efficient solution for managing seniorities in IT companies. With its user-friendly interface and powerful features, it simplifies the process of evaluating and tracking the expertise levels of employees. From junior developers to senior architects, Expertize provides a centralized platform to assess, analyze, and nurture talent within your organization.</p>
+                <div className='relative mt-32'> 
+                
+                <style>
+                    {
+                        `
+                        .xd {
+                            text-shadow: -5px 5px, 5px 5px, 5px 5px;
+                            color: rgb(34, 195, 139);
+                        }
+                        `
+                    }
+                </style>
+                <div className='xd'>
+                    <h1 className="text-9xl font-extrabold drop-shadow-lg tracking-widest italic mb-8">
+                        EXPERTIZE
+                    </h1>
+                </div>
+                    <p className="text-xl font-bold text-gray-700 mb-8">
+                        Revolutionize seniority management with Expertize.
+                    </p>
+                    <p className="text-xl font-bold text-gray-700 mb-8">
+                        Optimize resources, drive career growth.
+                    </p>
+                    <p className="text-xl font-bold text-gray-700 mb-8">
+                        Unlock the full potential of your IT workforce.
+                    </p>
                     { (role == "user" || role == "admin") && 
                     <p>Welcome, {username}</p>}
                     { (role != "user" && role != "admin") &&
-                    <a href="/login" className="inline-block bg-teal-500 text-white py-2 px-4 rounded text-3xl font-semibold">Log in</a> }
+                    <a href="/login" className="inline-block bg-[#009879] text-white py-2 px-4 rounded text-3xl font-semibold">Log in</a> }
                 </div>
             </div>
         </div>
