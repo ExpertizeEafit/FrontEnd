@@ -4,7 +4,7 @@ import { getPendingRequests, updateRequestStatus } from "../api/certification";
 import { PendingRequestsStatus } from "../types/Types";
 import DataTable, { TableColumn } from "react-data-table-component";
 import light from "../styles/tableStyles";
-import { Link } from "react-router-dom";
+import Title from "../components/Title/Title";
 
 interface DataRow {
   id: number;
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
+      <Title title="Pending requests"/>
       <div className="flex flex-wrap ">
         <div className="mt-8 mx-auto w-full max-w-prose rounded-xl">
           <DataTable
