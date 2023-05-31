@@ -29,7 +29,7 @@ export default function Home() {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet"></link>
         <div className="mt-32 mx-auto w-screen max-w-7xl">
             <div className='bg-white h-[42rem] rounded-lg p-8 shadow-xl overflow-hidden relative'>
-                <img className='absolute w-screen grayscale opacity-5' src='https://cuevista.com/wp-content/uploads/2019/05/Technologies.png'/>
+                <img className='absolute w-screen grayscale opacity-5 animate-[bounce_40s_ease-out_infinite]' src='https://cuevista.com/wp-content/uploads/2019/05/Technologies.png'/>
                 
                 <div className='relative mt-32'> 
                 
